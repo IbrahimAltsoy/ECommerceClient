@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule.forChild([
-      {path: "X", component:CustomersComponent}
+      {path: "", component:CustomersComponent}
       // {path:"customerblabla", component:CustomersComponent} ;eklinde rooter eklenir
     ])
   ]
