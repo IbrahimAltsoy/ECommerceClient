@@ -6,10 +6,19 @@ declare var alertify: any;
 export class AlertifyService {
 
   constructor() { }
-  message(message: string, messageType : MessageType, position: Position){
+  message(message: string, messageType : MessageType, position: Position, delay:number, dismissOthers: boolean=false){
     alertify.set('notifier','position', position);
-    alertify[messageType]
+
+    alertify.set('notifier','delay', delay);
+    const mess = alertify[messageType]
 (message);
+if(dismissOthers){
+mess.dismissOthers();
+}
+
+  }
+  dismiss(){
+    alertify.dismissAll();
   }
 }
 export enum MessageType{
@@ -27,4 +36,10 @@ export enum Position{
   BottomLeft = "bottom-left",
   BottomCenter = "bottom-center"
 
+}
+export class AlertifyOptions{
+messageType: MessageType = MessageType.Message;
+position: Position = Position.BottonRight;
+delay: number= 2;
+dismisOthers: boolean= false
 }
