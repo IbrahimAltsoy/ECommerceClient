@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-declare var $:any
+// declare var $:any
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,6 +8,6 @@ declare var $:any
 export class AppComponent {
   title = 'ECommerceClient';
 }
-$(document).ready(()=>{
-  alert("Merhaba")
-})
+// $(document).ready(()=>{
+//   alert("Merhaba")
+// })
