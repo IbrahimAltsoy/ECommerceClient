@@ -4,15 +4,15 @@ declare var alertify: any;
   providedIn: 'root'
 })
 export class AlertifyService {
-
+  // , messageType : MessageType, position: Position, delay:number, dismissOthers: boolean=false = alertifyOptions
   constructor() { }
-  message(message: string, messageType : MessageType, position: Position, delay:number, dismissOthers: boolean=false){
-    alertify.set('notifier','position', position);
+  message(message: string, options: Partial<AlertifyOptions>){
+    alertify.set('notifier','position', options.position);
 
-    alertify.set('notifier','delay', delay);
-    const mess = alertify[messageType]
+    alertify.set('notifier','delay', options.delay);
+    const mess = alertify[options.messageType]
 (message);
-if(dismissOthers){
+if(options.dismisOthers){
 mess.dismissOthers();
 }
 
