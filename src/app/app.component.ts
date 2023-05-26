@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CustomToastrService, MessageType, ToastrPosition } from './services/ui/custom-toastr.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 // declare var $:any
 @Component({
@@ -9,11 +10,15 @@ import { CustomToastrService, MessageType, ToastrPosition } from './services/ui/
 })
 export class AppComponent {
   title = 'ECommerceClient';
-  constructor(private toastr: CustomToastrService) {
+  constructor(private toastr: CustomToastrService,private spinner: NgxSpinnerService) {
 
   }
   ngOnInit(): void {
-
+this.spinner.show("s1");
+setTimeout(() => {
+  /** spinner ends after 5 seconds */
+  this.spinner.hide("s1");
+}, 2000);
   }
   message(){
 this.toastr.message("Ibrajim", "dfggdf", {messageType: MessageType.Success, toastrPosition:ToastrPosition.BottomFullWidth })

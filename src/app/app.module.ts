@@ -7,18 +7,22 @@ import { AdminModule } from './admin/admin.module';
 import { UiModule } from './ui/ui.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { BaseComponent } from './base/base.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BaseComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AdminModule,
     UiModule,
-    BrowserAnimationsModule,ToastrModule.forRoot()
+    BrowserAnimationsModule,ToastrModule.forRoot(),
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
