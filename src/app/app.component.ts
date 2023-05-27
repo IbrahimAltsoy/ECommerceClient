@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CustomToastrService, MessageType, ToastrPosition } from './services/ui/custom-toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
-// declare var $:any
+ declare var $:any
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -39,3 +39,5 @@ this.toastr.message("Ibrajim", "dfggdf", {messageType: MessageType.Success, toas
 // $(document).ready(()=>{
 //   alert("Merhaba")
 // })
+ $.get("https://localhost:7167/api/Products/8a905e42-b3fc-429f-9c3a-ffb79d1392b6", data=> {console.log(data)});
+//  request attik api projesine sonucu da dogru dondurdu
