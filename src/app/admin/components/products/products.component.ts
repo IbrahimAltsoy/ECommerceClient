@@ -21,27 +21,22 @@ export class ProductsComponent extends BaseComponent implements OnInit{
     }).subscribe(data=> console.log(data));
 
 
-// post not working
-    this.htttpClientService.post({
-      controller : "products"
-
-    }, {
-      name: "Iphone Air",
-      stock: 113,
-      price: 7
-
-    }).subscribe();
-
+// post working no problm
     // this.htttpClientService.post({
     //   controller : "products"
 
     // }, {
-    //   name: "Toshiba Air",
-    //   stock: 113,
-    //   price: 7
+    //    id:"",
+    //   name: "Iphone Airsfddghj",
+    //   stock: 114453,
+    //   price: 724
 
     // }).subscribe();
-
+// json dosyasindaki verileri burada listeleyebildik
+    // this.htttpClientService.get({
+    //   baseUrl: "https://jsonplaceholder.typicode.com",
+    //   controller: "posts"
+    // }).subscribe(data=> console.log(data));
 
     // Put is working  no phave problem
 // this.htttpClientService.put({
@@ -57,7 +52,7 @@ export class ProductsComponent extends BaseComponent implements OnInit{
 //Delete :
 // this.htttpClientService.delete({
 // controller:"products"
-// },"c376c06d-7872-4f76-4767-08db6121c8e6").subscribe();
+// },"e2de5ba1-811c-43f4-aa39-5cc4d5a693d7").subscribe();
 
   }
 
