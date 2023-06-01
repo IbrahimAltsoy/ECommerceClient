@@ -13,7 +13,7 @@ constructor( private spinner: NgxSpinnerService){
 }
 showSpinner(spinnertype:SpinnerType){
   this.spinner.show(spinnertype);
-  setTimeout(()=> this.hideSpinner(spinnertype),500);
+  setTimeout(()=> this.hideSpinner(spinnertype),100);
 
 }
 hideSpinner(name:SpinnerType){
