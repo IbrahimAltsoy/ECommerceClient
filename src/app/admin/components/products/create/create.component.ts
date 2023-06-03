@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
@@ -19,6 +20,7 @@ export class CreateComponent extends BaseComponent implements OnInit{
     }
     create(id:HTMLInputElement, name:HTMLInputElement, stock: HTMLInputElement, price: HTMLInputElement){
       this.showSpinner(SpinnerType.BallscaleMultiple);
+
       const create_product = new Create_Product();
       create_product.id = id.value;
       create_product.name= name.value;
@@ -30,13 +32,25 @@ export class CreateComponent extends BaseComponent implements OnInit{
           messageType: MessageType.Success,
           position: Position.TopRight
 
-        })
-        this.hideSpinner(SpinnerType.BallscaleMultiple);
-      });
+        });
+
+      }, this.aletify.message("Hatali giris yapildi", {
+        dismisOthers:false,
+        messageType:MessageType.Error,
+        position:Position.TopRight
+      }));
 
 
-
-    }
   }
 
+}
 
+// this.aletify.message(errorMessage,
+//   {
+//     dismisOthers:true,
+//     messageType: MessageType.Error,
+//     position: Position.TopRight
+
+
+//   });
+// this.hideSpinner(SpinnerType.BallscaleMultiple);

@@ -1,5 +1,5 @@
 export class Create_Product {
-  id: string;
+  id?: string;
   name:string;
   stock: number;
   price:number;
