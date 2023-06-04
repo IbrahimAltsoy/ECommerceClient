@@ -34,11 +34,18 @@ export class CreateComponent extends BaseComponent implements OnInit{
 
         });
 
-      }, this.aletify.message("Hatali giris yapildi", {
-        dismisOthers:false,
-        messageType:MessageType.Error,
-        position:Position.TopRight
-      }));
+      }
+      // , errormesage=>{
+      //   debugger;
+      //   this.aletify.message(errormesage,
+      //     {
+      //     dismisOthers:true,
+      //     messageType:MessageType.Error,
+      //     position:Position.TopRight
+      //   })
+      // }
+      );
+
 
 
   }

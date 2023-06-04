@@ -10,6 +10,9 @@ import { ListComponent } from './list/list.component';
 import { UpdateComponent } from './update/update.component';
 import { DeleteComponent } from './delete/delete.component';
 import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 @NgModule({
   declarations: [
     ProductsComponent,
@@ -26,7 +29,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatSidenavModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule,
+    MatPaginatorModule
 
   ]
 })
