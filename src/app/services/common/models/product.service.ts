@@ -35,7 +35,7 @@ export class ProductService {
     });
 
   }
- async read( successCallBack?:()=>void, errorCallBack?:()=>void):Promise<List_Product[]>{
+ async read(page:number=0, size:number=5, successCallBack?:()=>void, errorCallBack?:()=>void):Promise<List_Product[]>{
 const promiseDate:Promise<List_Product[]> = this.httpclient.get<List_Product[]>({
   controller:"products"
 }).toPromise();
