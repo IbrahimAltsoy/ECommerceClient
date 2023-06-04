@@ -12,6 +12,7 @@ import { DeleteComponent } from './delete/delete.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { DeleteDirective } from 'src/app/directives/admin/delete.directive';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     CreateComponent,
     ListComponent,
     UpdateComponent,
-    DeleteComponent
+    DeleteComponent,
+    DeleteDirective
   ],
   imports: [
     CommonModule,

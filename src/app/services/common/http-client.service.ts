@@ -64,6 +64,10 @@ else
   url = `${this.url(requestParameters)}/${id}${requestParameters.querystring?`?${requestParameters.querystring}`:""}`;
 return this.httpClient.delete<T>(url, {headers: requestParameters.headers});
   }
+
+
+
+
 }
 export class RequestParameters{
 controller? : string;

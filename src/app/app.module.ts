@@ -12,10 +12,12 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpClientModule } from '@angular/common/http';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     BaseComponent
+
   ],
   imports: [
     BrowserModule,

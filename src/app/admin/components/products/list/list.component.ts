@@ -6,6 +6,7 @@ import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { List_Product } from 'src/app/contracts/list_product';
 import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
+declare var $:any;
 
 @Component({
   selector: 'app-list',
@@ -31,7 +32,11 @@ async getProducts(){
     this.paginator.length = listProduct.totalCount;
    // this.dataSource.paginator = this.paginator;
 }
-
+// delete(id,event){
+//   const img: HTMLImageElement = event.srcElement;
+//   console.log(img)
+//   alert(id);
+// }
 
 async pageChange(){
   await this.getProducts();
