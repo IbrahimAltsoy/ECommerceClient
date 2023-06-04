@@ -35,9 +35,10 @@ export class ProductService {
     });
 
   }
- async read(page:number=0, size:number=5, successCallBack?:()=>void, errorCallBack?:()=>void):Promise<List_Product[]>{
-const promiseDate:Promise<List_Product[]> = this.httpclient.get<List_Product[]>({
-  controller:"products"
+ async read(page:number=0, size:number=5, successCallBack?:()=>void, errorCallBack?:()=>void):Promise<{totalCount: number, products:List_Product[]}>{
+const promiseDate:Promise<{totalCount: number, products:List_Product[]}> = this.httpclient.get<{totalCount: number, products:List_Product[]}>({
+  controller:"products",
+  querystring:`page=${page}&size=${size}`
 }).toPromise();
 
 promiseDate.then((result) => {

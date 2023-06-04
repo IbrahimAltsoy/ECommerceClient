@@ -16,7 +16,7 @@ return `${requestParameters.baseUrl ? requestParameters.baseUrl: this.baseUrl}/$
     if(requestParameters.fullEndPoint)
     url = requestParameters.fullEndPoint;
     else
-    url = `${this.url(requestParameters)}${id ? `${id}` : ""}`;
+    url = `${this.url(requestParameters)}${id ? `/${id}` : ""}${requestParameters.querystring?`?${requestParameters.querystring}`:""}`;
     return this.httpClient.get<T>(url, {headers:requestParameters.headers})
   }
 
@@ -27,7 +27,7 @@ return `${requestParameters.baseUrl ? requestParameters.baseUrl: this.baseUrl}/$
     if(requestParameters.fullEndPoint)
     url = requestParameters.fullEndPoint;
     else
-    url = `${this.url(requestParameters)}`;
+    url = `${this.url(requestParameters)}${requestParameters.querystring?`?${requestParameters.querystring}`:""}`;
     return this.httpClient.post<T>(url, body,{ headers: requestParameters.headers});
 
   }
@@ -48,7 +48,7 @@ return `${requestParameters.baseUrl ? requestParameters.baseUrl: this.baseUrl}/$
     if(requestParameters.fullEndPoint)
     url = requestParameters.fullEndPoint;
     else
-    url = `${this.url(requestParameters)}`;
+    url = `${this.url(requestParameters)}${requestParameters.querystring?`?${requestParameters.querystring}`:""}`;
 
     return this.httpClient.put<T>(url,body,{headers: requestParameters.headers});
 
@@ -61,7 +61,7 @@ let url : string = "";
 if(requestParameters.fullEndPoint)
   url = requestParameters.fullEndPoint;
 else
-  url = `${this.url(requestParameters)}/${id}`;
+  url = `${this.url(requestParameters)}/${id}${requestParameters.querystring?`?${requestParameters.querystring}`:""}`;
 return this.httpClient.delete<T>(url, {headers: requestParameters.headers});
   }
 }
@@ -71,6 +71,6 @@ action? : string;
 headers?: HttpHeaders;
 baseUrl?: string;
 fullEndPoint?: string;
-//querystring?:string;
+querystring?:string;
 
 }

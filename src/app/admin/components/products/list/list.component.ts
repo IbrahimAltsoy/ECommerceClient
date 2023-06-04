@@ -14,23 +14,28 @@ import { ProductService } from 'src/app/services/common/models/product.service';
 })
 export class ListComponent extends BaseComponent implements OnInit {
   constructor(private productService:ProductService, spinner: NgxSpinnerService, private alertify:AlertifyService){super(spinner)}
-  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'updateDate'];
+  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'updateDate','delete','update'];
   dataSource: MatTableDataSource<List_Product> = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
    //@ViewChild(MatPaginator) paginator: MatPaginator;
 async getProducts(){
   this.showSpinner(SpinnerType.BallscaleMultiple);
-  const listProduct:List_Product[] = await this.productService.read(this.paginator? this.paginator.pageIndex:0,this.paginator? this.paginator.pageSize:5,()=>this.hideSpinner(SpinnerType.BallscaleMultiple), ()=>{
+  const listProduct:{totalCount: number, products:List_Product[]} = await this.productService.read(this.paginator? this.paginator.pageIndex:0,this.paginator? this.paginator.pageSize:5,()=>this.hideSpinner(SpinnerType.BallscaleMultiple), ()=>{
       this.alertify.message("Listemele Basarisiz oldu",{
         dismisOthers:true,
         messageType:MessageType.Error,
         position:Position.TopRight
       })
     });
-    this.dataSource = new MatTableDataSource<List_Product>(listProduct);
-    this.dataSource.paginator = this.paginator;
+    this.dataSource = new MatTableDataSource<List_Product>(listProduct.products);
+    this.paginator.length = listProduct.totalCount;
+   // this.dataSource.paginator = this.paginator;
 }
 
+
+async pageChange(){
+  await this.getProducts();
+}
   async ngOnInit() {
 
 await this.getProducts();
