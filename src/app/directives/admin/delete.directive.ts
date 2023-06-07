@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output, Renderer2 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent, DeleteState } from 'src/app/dialogs/delete-dialog/delete-dialog.component';
 import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
+import { HttpClientService } from 'src/app/services/common/http-client.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 declare var $:any;
 @Directive({
@@ -9,7 +11,7 @@ declare var $:any;
 })
 export class DeleteDirective {
 
-  constructor(private element: ElementRef, private _renderer : Renderer2, private productService: ProductService, private aletify: AlertifyService,public dialog: MatDialog)
+  constructor(private element: ElementRef, private _renderer : Renderer2, private httpClient:HttpClientService, private aletify: AlertifyService,public dialog: MatDialog)
   {
     const img = _renderer.createElement("img");
     img.setAttribute("src", "../../../../../assets/delete.svg");
@@ -19,20 +21,27 @@ export class DeleteDirective {
     _renderer.appendChild(element.nativeElement, img)
   }
   @Input() id:string;
+  @Input() controller :string;
   @Output() callBack: EventEmitter<any> = new EventEmitter();
 @HostListener("click")
 async onlick(){
   this.openDialog(async()=>{
     const td :HTMLTableDataCellElement= this.element.nativeElement;
-    await this.productService.delete(this.id);
-     $(td.parentElement).fadeOut(this.aletify.message("Urun basariyla silindi.",{
-       dismisOthers:true,
-       messageType:MessageType.Warning,
-       position:Position.TopRight
-     }), ()=>{
-       this.callBack.emit();
+    this.httpClient.delete({
 
-  })
+      controller: this.controller
+    },this.id).subscribe(data=>{
+      $(td.parentElement).fadeOut(this.aletify.message("Urun basariyla silindi.",{
+        dismisOthers:true,
+        messageType:MessageType.Warning,
+        position:Position.TopRight
+      }), ()=>{
+        this.callBack.emit();
+
+   });
+
+    });
+
 
   });
 }
