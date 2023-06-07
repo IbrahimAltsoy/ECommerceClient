@@ -13,3 +13,5 @@
   <input matInput type="number" value="0" min="0" #txtPrice>
 </mat-form-field>
 <button mat-raised-button color="primary" class="btn btn-primary" (click)="create(txtId,txtName, txtStock,txtPrice)">Create</button>
+<br>
+<app-file-upload [options]="fileUploadOptions"></app-file-upload>
