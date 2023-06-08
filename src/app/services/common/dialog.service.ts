@@ -1,9 +1,37 @@
+import { ComponentType } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
+import { DialogPosition, MatDialog } from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DialogService {
+export class DialogService{
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
+  openDialog(dialogParameters: DilalogParameters): void {
+    const dialogRef = this.dialog.open(dialogParameters.componentType, {
+width: dialogParameters.options.width,
+height:dialogParameters.options.height,
+position: dialogParameters.options.position,
+      data: dialogParameters.data,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if(result==dialogParameters.data){
+        dialogParameters.afterClosed();
+      }
+    });
+  }
+}
+export class DilalogParameters {
+  componentType: ComponentType<any>;
+  data:any;
+  afterClosed: ()=>void;
+  options?: DilaogOptions;
+}
+export class DilaogOptions{
+  height?: string="280px";
+  width?: string="200px";
+  position?: DialogPosition;
 }
