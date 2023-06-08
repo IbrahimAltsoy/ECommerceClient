@@ -25,6 +25,7 @@ export class CreateComponent extends BaseComponent implements OnInit{
       action : "upload",
       controller: "products",
       explain : "Resimleri secin ya da surukleyin",
+      accept: ".josn, .png, .jpeg, .jpg"
 
 
     }
