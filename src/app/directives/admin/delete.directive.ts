@@ -3,6 +3,7 @@ import { Directive, ElementRef, EventEmitter, HostListener, Input, Output, Rende
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent, DeleteState } from 'src/app/dialogs/delete-dialog/delete-dialog.component';
 import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
+import { DialogService } from 'src/app/services/common/dialog.service';
 import { HttpClientService } from 'src/app/services/common/http-client.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 declare var $:any;
@@ -11,7 +12,12 @@ declare var $:any;
 })
 export class DeleteDirective {
 
-  constructor(private element: ElementRef, private _renderer : Renderer2, private httpClient:HttpClientService, private aletify: AlertifyService,public dialog: MatDialog)
+  constructor(private element: ElementRef,
+     private _renderer : Renderer2,
+      private httpClient:HttpClientService,
+       private aletify: AlertifyService,
+       public dialog: MatDialog,
+        private dialogService: DialogService)
   {
     const img = _renderer.createElement("img");
     img.setAttribute("src", "../../../../../assets/delete.svg");
@@ -25,24 +31,28 @@ export class DeleteDirective {
   @Output() callBack: EventEmitter<any> = new EventEmitter();
 @HostListener("click")
 async onlick(){
-  this.openDialog(async()=>{
-    const td :HTMLTableDataCellElement= this.element.nativeElement;
-    this.httpClient.delete({
+  this.dialogService.openDialog({
+    componentType: DeleteDialogComponent,
+    data: DeleteState.Yes,
+    afterClosed: async()=>{
+      const td :HTMLTableDataCellElement= this.element.nativeElement;
+      this.httpClient.delete({
 
-      controller: this.controller
-    },this.id).subscribe(data=>{
-      $(td.parentElement).fadeOut(this.aletify.message("Urun basariyla silindi.",{
-        dismisOthers:true,
-        messageType:MessageType.Warning,
-        position:Position.TopRight
-      }), ()=>{
-        this.callBack.emit();
+        controller: this.controller
+      },this.id).subscribe(data=>{
+        $(td.parentElement).fadeOut(this.aletify.message("Urun basariyla silindi.",{
+          dismisOthers:true,
+          messageType:MessageType.Warning,
+          position:Position.TopRight
+        }), ()=>{
+          this.callBack.emit();
 
-   });
+     });
 
-    });
+      });
 
 
+    }
   });
 }
 openDialog(afterClosed:any): void {
@@ -58,3 +68,24 @@ openDialog(afterClosed:any): void {
   });
 
 }}
+
+
+// async()=>{
+//   const td :HTMLTableDataCellElement= this.element.nativeElement;
+//   this.httpClient.delete({
+
+//     controller: this.controller
+//   },this.id).subscribe(data=>{
+//     $(td.parentElement).fadeOut(this.aletify.message("Urun basariyla silindi.",{
+//       dismisOthers:true,
+//       messageType:MessageType.Warning,
+//       position:Position.TopRight
+//     }), ()=>{
+//       this.callBack.emit();
+
+//  });
+
+//   });
+
+
+// }
