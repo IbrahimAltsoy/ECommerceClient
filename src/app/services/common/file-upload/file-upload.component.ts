@@ -56,7 +56,13 @@ export class FileUploadComponent {
         messageType:MessageType.Success,
         position:Position.TopRight
       });
-    },()=>{console.log("Basarisiz oldu")});
+    },(errer: HttpErrorResponse)=>{
+      this.alertify.message("Yukleme basarisiz oldu",{
+        dismisOthers:true,
+        messageType:MessageType.Error,
+        position: Position.TopRight
+      });
+    });
 
     }
 });
